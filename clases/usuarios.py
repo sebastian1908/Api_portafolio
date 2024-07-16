@@ -51,13 +51,14 @@ class Usuarios:
         usuario = data["usuario"]
         passw = data["password"]
         dataPass = passw.encode('utf-8')
-        hashed = bcrypt.hashpw(dataPass, bcrypt.gensalt())
+        hashed = bcrypt.hashpw(dataPass, bcrypt.gensalt()).decode("utf-8")
 
         query = usu_model(NOMBRE=nombre, APELLIDO=apellido, USUARIO=usuario, PASS=hashed)
 
         if query:
             self.db.add(query)
             self.db.commit()
+            print(hashed)
             return response.created(query)
         else:
             return response.bad_request(query)
@@ -94,7 +95,7 @@ class Usuarios:
         resend.api_key = key
         re = resend.Emails.send({
             "from": "onboarding@resend.dev",
-            "to": "*************************",
+            "to": "arrieta008406@gmail.com",
             "subject": "RECUPERAR CONTRASEÑA",
             "html": f"<div style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; max-width: 600px; margin: 0 auto; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);'><p style='color: #555555;'>SU CODIGO DE RECUPERACION ES : <strong style='color: #d9534f;'>{codigo_recuperacion}</strong></p><a href='' style='display: inline-block; padding: 10px 20px; margin-top: 20px; background-color: #5cb85c; color: #ffffff; text-decoration: none; border-radius: 5px;'>Visita la página</a></div>"
         })
@@ -115,7 +116,7 @@ class Usuarios:
         codigo_recp = data["codigo"]
         nueva_pass = data["nueva_password"]
         dataPass = nueva_pass.encode('utf-8')
-        hashed = bcrypt.hashpw(dataPass, bcrypt.gensalt())
+        hashed = bcrypt.hashpw(dataPass, bcrypt.gensalt()).decode("utf-8")
 
         recuperacion = (
             self.db.query(RecuperarPass)

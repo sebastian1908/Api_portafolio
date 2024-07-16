@@ -24,6 +24,7 @@ class Exepciones:
                         print(f"Token recibido: {token}")  # Imprimir el token recibido
                         payload = jwt.decode(token, self.secret_key, algorithms=['HS256'])
                         print(f"Token válido para el usuario: {payload['usuario']}")
+                        event['user'] = payload
                     except KeyError as e:
                         # Capturar el error si el encabezado no se encuentra
                         return {

@@ -4,15 +4,12 @@ from sqlalchemy.orm import sessionmaker
 
 base = declarative_base()
 
-class Usuarios(base):
-    __tablename__ = "usuarios"
+class Noticias(base):
+    __tablename__ = "noticia"
     ID = Column(INTEGER, primary_key=True, autoincrement=True, nullable=False)
-    NOMBRE = Column(String(20), nullable=True)
-    APELLIDO = Column(String(20), nullable=True)
+    TITULO = Column(String(30), nullable=False)
+    DESCRIPCION = Column(String(500), nullable=False)
     ACTIVO = Column(INTEGER, default=1)
-    USUARIO = Column(String(20), nullable=False)
-    PASS = Column(String(20), nullable=False)
-    ROL = Column(INTEGER, default=0)
     FECHA_CREACION = Column(DateTime, default=func.now(), nullable=False)
     
 

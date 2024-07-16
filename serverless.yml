@@ -33,6 +33,27 @@ functions:
       - httpApi:
           path: /new_pass
           method: post
+  
+  noticie:
+    handler: handler.noticie
+    events:
+      - httpApi:
+          path: /noticie
+          method: post
+    
+  insert_comment:
+    handler: handler.insert_comment
+    events:
+      - httpApi:
+          path: /comment
+          method: post
+
+  comentario_noticia:
+    handler: handler.comentario_noticia
+    events:
+      - httpApi:
+          path: /comentario_noticia
+          method: post
 
 plugins:
   - serverless-offline
